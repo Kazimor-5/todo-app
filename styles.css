@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.title {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.todoForm {
+  padding: 1rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputForm {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.buttonForm {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  background: rgb(50, 50, 233);
+  color: white;
+  font-size: 1rem;
+}
+
+.uncheckButton {
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: 1px solid lightgrey;
+  padding: 0.5rem;
+  background: rgb(1, 151, 9);
+  color: white;
+  font-size: 1rem;
+}
+
+.checkButton {
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: 1px solid lightgrey;
+  padding: 0.5rem;
+  background: rgb(233, 227, 227);
+  color: grey;
+  font-size: 1rem;
+}
+
+.buttonDelete {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background: rgb(255, 36, 36);
+  color: white;
+  font-size: 1rem;
+}
+
+.line {
+  text-decoration: line-through;
+}
