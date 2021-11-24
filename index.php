@@ -27,9 +27,9 @@ $id = $_SESSION["id"] ?? "";
             <input class="inputForm" type="text" name="todo" placeholder="A faire:">
             <button class="buttonForm" type="submit" name="todoSubmit">Ajouter à la liste</button>
         </form>
+        <?php
         //* AFFICHAGE
-            <?php
-                $stmt = $pdo->query("SELECT * from todoapp");
+        $stmt = $pdo->query("SELECT * from todoapp");
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     if ($row["is_check"] == 1) {
                         $class = "line";
