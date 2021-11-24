@@ -1,22 +1,6 @@
-<?php
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "todo";
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(Exception $e) {
-    echo "Exception message: " . $e->getMessage();
-}
-
+<?php 
 session_start();
-if(isset($_POST["editSubmit"])) {
-    $_SESSION["edit"] = true;
-    $_SESSION["id"] = $_POST["todo_id"];
-    header("location:index.php");
-}
+require("./requete.php");
 
 $edit = $_SESSION["edit"] ?? false;
 $id = $_SESSION["id"] ?? "";
@@ -43,17 +27,7 @@ $id = $_SESSION["id"] ?? "";
             <input class="inputForm" type="text" name="todo" placeholder="A faire:">
             <button class="buttonForm" type="submit" name="todoSubmit">Ajouter à la liste</button>
         </form>
-            <?php 
-                if(isset($_POST["todoSubmit"])){
-                    $sql = "INSERT INTO todoapp(todo) VALUES (:todo)";
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->execute([
-                        "todo" => $_POST["todo"]
-                    ]);
-                    header("location: index.php");
-                    return;
-                }
-            ?>
+        //* AFFICHAGE
             <?php
                 $stmt = $pdo->query("SELECT * from todoapp");
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -80,66 +54,18 @@ $id = $_SESSION["id"] ?? "";
                             <input type ="hidden" name="todo_id" value="' . $row["id"] . '">
                             <button class="checkButton" type="submit" name="checkSubmit"><i class="fas fa-check"></i></button>
                             </form>';
-                            if(isset($_POST["checkSubmit"])) {
-                                $sql = "UPDATE todoapp SET is_check = :is_check WHERE id = :id";
-                                $stmt = $pdo->prepare($sql);
-                                $stmt->execute([
-                                    "id" => $_POST["todo_id"],
-                                    "is_check" => 1
-                                ]);
-                                header("location: index.php");
-                                return;
-                            }
                         } elseif($row["is_check"] == 1) {
                             echo '<form class="todoForm" method="POST">
                             <input type ="hidden" name="todo_id" value="' . $row["id"] . '">
                             <button class="uncheckButton" type="submit" name="uncheckSubmit"><i class="fas fa-check"></i></button>
                             </form>';
-                            if (isset($_POST["uncheckSubmit"])) {
-                            $sql = "UPDATE todoapp SET is_check = :is_check WHERE id = :id";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->execute([
-                                "id" => $_POST["todo_id"],
-                                "is_check" => 0
-                            ]);
-                            header("location: index.php");
-                            return;
-                            }
                         }
-                    }
-                    if(isset($_POST["modify"]) && isset($_POST["todo_name"])) {
-                        $sql = "UPDATE todoapp SET todo = :todo WHERE id = :id";
-                        $stmt = $pdo->prepare($sql);
-                        $stmt->execute([
-                            "id" => $_POST["todo_id"],
-                            "todo" => $_POST["todo_name"]
-                        ]);
-                        $_SESSION["edit"] = false;
-                        header("location: index.php");
-                        return;
                     }
                 }
             ?>
             <form class="todoForm" method="POST">
                 <button class="buttonDelete" type="submit" name="deleteAllSubmit">Vider la liste</button>
             </form>
-            <?php
-                if(isset($_POST["deleteSubmit"]) && isset($_POST["todo_id"])) {
-                    $sql = "DELETE FROM todoapp WHERE id = :id";
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->execute([
-                        "id" => $_POST["todo_id"]
-                    ]);
-                    header("location: index.php");
-                    return;
-                    }
-                if(isset($_POST["deleteAllSubmit"])) {
-                        $sql = "TRUNCATE TABLE todoapp ";
-                    $stmt = $pdo->query($sql);
-                    header("location: index.php");
-                    return;
-                }
-            ?>
     </section>
 </body>
 </html>
