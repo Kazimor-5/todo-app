@@ -7,6 +7,7 @@
 .title {
   text-align: center;
   padding: 1.5rem;
+  font-size: 3rem;
 }
 
 .container {
@@ -61,10 +62,10 @@
   border-radius: 5px;
   padding: 0.5rem;
   margin: 0.5rem;
-  border: 1px solid lightgrey;
+  border: 1px solid green;
   padding: 0.5rem;
   background: rgb(233, 227, 227);
-  color: grey;
+  color: green;
   font-size: 1rem;
 }
 
@@ -77,6 +78,32 @@
   font-size: 1rem;
 }
 
+p {
+  font-size: 1.5rem;
+}
+
 .line {
   text-decoration: line-through;
+  font-size: 1.5rem;
+}
+
+.buttonForm:hover {
+  cursor: pointer;
+  background: rgb(22, 22, 161);
+}
+
+.checkButton:hover {
+  cursor: pointer;
+  background: rgb(1, 151, 9);
+  color: white;
+}
+
+.uncheckButton:hover {
+  cursor: pointer;
+  background: rgb(0, 88, 4);
+}
+
+.buttonDelete:hover {
+  cursor: pointer;
+  background: rgb(170, 25, 25);
 }
