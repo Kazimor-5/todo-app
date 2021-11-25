@@ -4,6 +4,7 @@ require("./requete.php");
 
 $edit = $_SESSION["edit"] ?? false;
 $id = $_SESSION["id"] ?? "";
+$flash = $_SESSION["flash"] ?? "";
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +19,11 @@ $id = $_SESSION["id"] ?? "";
 </head>
 <body class="container">
     <header>
+        <?php
+            if(strlen($flash) > 0) {
+                echo '<p class="message">' . $flash . '</p>';
+            }
+        ?>
         <h1 class="title">
             To Do List 
         </h1>

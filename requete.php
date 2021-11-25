@@ -1,6 +1,7 @@
 <?php
 require_once("connexion.php");
 if(isset($_POST["todoSubmit"])){
+    $_SESSION['flash'] = 'Tâche ajoutée';
     $sql = "INSERT INTO todoapp(todo) VALUES (:todo)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -33,6 +34,7 @@ if (isset($_POST["uncheckSubmit"])) {
 }
 
 if(isset($_POST["modify"]) && isset($_POST["todo_name"])) {
+    $_SESSION['flash'] = 'Tâche modifiée';
     $sql = "UPDATE todoapp SET todo = :todo WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -45,6 +47,7 @@ if(isset($_POST["modify"]) && isset($_POST["todo_name"])) {
 }
 
 if(isset($_POST["deleteSubmit"]) && isset($_POST["todo_id"])) {
+    $_SESSION['flash'] = 'Tâche supprimée';
     $sql = "DELETE FROM todoapp WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -55,7 +58,8 @@ if(isset($_POST["deleteSubmit"]) && isset($_POST["todo_id"])) {
 }
 
 if(isset($_POST["deleteAllSubmit"])) {
-$sql = "TRUNCATE TABLE todoapp ";
+    $_SESSION['flash'] = 'Liste supprimée';
+    $sql = "TRUNCATE TABLE todoapp ";
     $stmt = $pdo->query($sql);
     header("location: index.php");
     return;
